@@ -2,21 +2,17 @@ import axios from "../../contexts/api/axios";
 import GetUserData from "../../contexts/api/udata";
 
 import Header from "../../components/header/header";
-import DeleteModal from "../../components/modals/delete";
 import LoadingEDT from "../../components/loading/loadingEDT";
+import EmptyCard from "../../components/template/emptyCard";
+import CardTrofel from "../../components/template/cardTrofel";
+import LokaTitre from "../../components/template/lokaTitre";
+import LokaCorps from "../../components/template/lokaCorps";
 
 import { useEffect, useRef, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import { FaPlus } from "react-icons/fa";
-import {
-  BsFillTrashFill,
-  BsPencilSquare,
-  BsEye,
-  BsPersonPlusFill,
-  BsSearch,
-} from "react-icons/bs";
+import { BsSearch } from "react-icons/bs";
 
 import "./loka.css";
 
@@ -34,13 +30,10 @@ const trofa = {
 
 export default function Loka() {
   //#region //-variable
-  const navigate = useNavigate();
 
   const u_info = GetUserData();
   const [loka, setLoka] = useState([]);
   const [details, setDetails] = useState(null);
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [selectedEntity, setSelectedEntity] = useState(null);
   const [searchVisible, setSearchVisible] = useState(false);
   const searchInputRef = useRef(null);
 
@@ -92,28 +85,10 @@ export default function Loka() {
   }
   //#endregion
 
-  //#region //-modals
-  const handleDeleteClick = (loka) => {
-    setSelectedEntity(loka);
-    setShowDeleteModal(true);
-  };
-  const handleDeleteConfirm = () => {
-    setShowDeleteModal(false);
-    getLoka();
-  };
-
-  const handleEditClick = (entity) => {
-    navigate(`/editLoka/${entity.id}`, { state: { entity } });
-  };
-
-  const handleDetailClick = (entity) => {
-    navigate(`/aboutLoka/${entity.id}`, { state: { entity } });
-  };
-  //#endregion
-
   //#region //-search
   const toggleSearch = () => {
     setSearchVisible(!searchVisible);
+    if (searchVisible == false) getLoka();
   };
   const [contenuTab, setContenuTab] = useState(false);
 
@@ -128,15 +103,17 @@ export default function Loka() {
         val: valeur,
       };
 
-      axios.post(`recherche`, finalInputs, u_info.opts).then((response) => {
-        if (response.data.success) {
-          setLoka(response.data.res);
-          setContenuTab(true);
-        } else {
-          setLoka(response.data.res);
-          setContenuTab(false);
-        }
-      });
+      axios
+        .post(url_req + `recherche/`, finalInputs, u_info.opts)
+        .then((response) => {
+          if (response.data.success) {
+            setLoka(response.data.res);
+            setContenuTab(true);
+          } else {
+            setLoka(response.data.res);
+            setContenuTab(false);
+          }
+        });
     }
   }
   //#endregion
@@ -162,274 +139,214 @@ export default function Loka() {
         )}
       </Header>
 
-      <div className="container-fluid flex-grow-1">
+      <div className="container-fluid flex-grow-1 mt-3">
         <main className="col-md-12 ms-sm-auto col-lg-12 px-md-4 main">
           <div className="row">
-            <div className="col-md">
-              <div className="row cadre">
-                <div className="d-flex flex-column sous-cadre">
-                  <div
-                    className="mb-2 d-flex justify-content-center align-items-center titre-sous-cadre"
-                    style={{
-                      color: "transparent",
-                      backgroundColor: "transparent",
-                    }}
-                  >
-                    {" "}
-                    ...{" "}
-                  </div>
-                  <div className="d-flex flex-column corps-sous-cadre">
-                    <div className="bg-primary mb-2 flex-grow-1 d-flex justify-content-center align-items-center">
-                      Petit Dejeuner
-                    </div>
-                    <div className="mb-2 flex-grow-1 d-flex justify-content-center align-items-center">
-                      Gouter
-                    </div>
-                    <div className="mb-2 flex-grow-1 d-flex justify-content-center align-items-center">
-                      Dejeuner
-                    </div>
-                    <div className="mb-2 flex-grow-1 d-flex justify-content-center align-items-center">
-                      Souper
-                    </div>
-                    <div className="mb-2 flex-grow-1 d-flex justify-content-center align-items-center">
-                      Dinner
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <LokaTitre />
 
-            <div className="col-md">
-              <div className="row cadre">
-                <div className="d-flex flex-column sous-cadre">
-                  <div className="mb-2 d-flex justify-content-center align-items-center titre-sous-cadre">
-                    Lundi
-                  </div>
+            <LokaCorps jour={"Lundi"}>
+              <div className="d-flex flex-column corps-sous-cadre">
+                {!details ? (
+                  <LoadingEDT />
+                ) : loka.length > 0 ? (
+                  loka
+                    .slice(trofa.lundi)
+                    .slice(0, 5)
+                    .map((s, key) =>
+                      s.lnom != "/" ? (
+                        <CardTrofel
+                          key={key}
+                          lnom={s.lnom}
+                          id={s.id}
+                          onEditSuccess={getLoka}
+                          onDeleteSuccess={getLoka}
+                        />
+                      ) : (
+                        <EmptyCard key={key} />
+                      )
+                    )
+                ) : (
+                  Array.from({ length: 5 }).map((_, index) => (
+                    <EmptyCard key={index} onSave={getLoka} />
+                  ))
+                )}
+              </div>
+            </LokaCorps>
 
-                  <div className="d-flex flex-column corps-sous-cadre">
-                    {!details ? (
-                      <LoadingEDT />
-                    ) : (
-                      <>
-                        {loka.length > 0 ? (
-                          loka
-                            .slice(trofa.lundi)
-                            .slice(0, 5)
-                            .map((s, key) => (
-                              <div
-                                className="mb-2 mb-2 d-flex justify-content-center align-items-center contenu-corps-sous-cadre cardTrofel"
-                                key={key}
-                              >
-                                {s.lnom != "/" ? (
-                                  <>
-                                    <div className="card-underlay">
-                                      {s.lnom}
-                                    </div>
-                                    <div className="card-overlay">
-                                      <div className="co-top">
-                                        <div className="co-t-maso">
-                                          <BsEye
-                                            onClick={() => handleDetailClick(s)}
-                                            className="maso"
-                                          />
-                                        </div>
-                                      </div>
-                                      <div className="co-bottom">
-                                        <div className="co-b-left">
-                                          <BsPencilSquare
-                                            onClick={() => handleEditClick(s)}
-                                            className="flex-grow-1 ovao"
-                                          />
-                                        </div>
-                                        <div className="co-b-right">
-                                          <BsFillTrashFill
-                                            onClick={() => handleDeleteClick(s)}
-                                            className="flex-grow-1 fafao"
-                                          />
-                                        </div>
-                                      </div>
-                                    </div>{" "}
-                                  </>
-                                ) : (
-                                  <div className="card-vide"></div>
-                                )}
-                              </div>
-                            ))
-                        ) : (
-                          <>
-                            {Array.from({ length: 5 }).map((_, index) => (
-                              <div
-                                key={index}
-                                className="mb-2 mb-2 d-flex justify-content-center align-items-center contenu-corps-sous-cadre cardTrofel"
-                              >
-                                <div className="card-vide"></div>
-                              </div>
-                            ))}
-                          </>
-                        )}
-                      </>
-                    )}
-                  </div>
-                </div>
+            <LokaCorps jour={"Mardi"}>
+              <div className="d-flex flex-column corps-sous-cadre">
+                {!details ? (
+                  <LoadingEDT />
+                ) : loka.length > 0 ? (
+                  loka
+                    .slice(trofa.mardi)
+                    .slice(0, 5)
+                    .map((s, key) =>
+                      s.lnom != "/" ? (
+                        <CardTrofel
+                          key={key}
+                          lnom={s.lnom}
+                          id={s.id}
+                          onEditSuccess={getLoka}
+                          onDeleteSuccess={getLoka}
+                        />
+                      ) : (
+                        <EmptyCard key={key} />
+                      )
+                    )
+                ) : (
+                  Array.from({ length: 5 }).map((_, index) => (
+                    <EmptyCard key={index} onSave={getLoka} />
+                  ))
+                )}
               </div>
-            </div>
+            </LokaCorps>
 
-            <div className="col-md">
-              <div className="row cadre">
-                <div className="d-flex flex-column">
-                  <div className="mb-2 d-flex justify-content-center align-items-center titre-sous-cadre">
-                    Mardi
-                  </div>
-                  <div className="mb-2 flex-grow-1 d-flex justify-content-center align-items-center">
-                    Petit Dejeuner
-                  </div>
-                  <div className="mb-2 flex-grow-1 d-flex justify-content-center align-items-center">
-                    Gouter
-                  </div>
-                  <div className="mb-2 flex-grow-1 d-flex justify-content-center align-items-center">
-                    Dejeuner
-                  </div>
-                  <div className="mb-2 flex-grow-1 d-flex justify-content-center align-items-center">
-                    Souper
-                  </div>
-                  <div className="mb-2 flex-grow-1 d-flex justify-content-center align-items-center">
-                    Dinner
-                  </div>
-                </div>
+            <LokaCorps jour={"Mercredi"}>
+              <div className="d-flex flex-column corps-sous-cadre">
+                {!details ? (
+                  <LoadingEDT />
+                ) : loka.length > 0 ? (
+                  loka
+                    .slice(trofa.mercredi)
+                    .slice(0, 5)
+                    .map((s, key) =>
+                      s.lnom != "/" ? (
+                        <CardTrofel
+                          key={key}
+                          lnom={s.lnom}
+                          id={s.id}
+                          onEditSuccess={getLoka}
+                          onDeleteSuccess={getLoka}
+                        />
+                      ) : (
+                        <EmptyCard key={key} />
+                      )
+                    )
+                ) : (
+                  Array.from({ length: 5 }).map((_, index) => (
+                    <EmptyCard key={index} onSave={getLoka} />
+                  ))
+                )}
               </div>
-            </div>
-            <div className="col-md">
-              <div className="row cadre">
-                <div className="d-flex flex-column">
-                  <div className="mb-2 flex-grow-1 d-flex justify-content-center align-items-center">
-                    Mercredi
-                  </div>
-                  <div className="mb-2 flex-grow-1 d-flex justify-content-center align-items-center">
-                    Petit Dejeuner
-                  </div>
-                  <div className="mb-2 flex-grow-1 d-flex justify-content-center align-items-center">
-                    Gouter
-                  </div>
-                  <div className="mb-2 flex-grow-1 d-flex justify-content-center align-items-center">
-                    Dejeuner
-                  </div>
-                  <div className="mb-2 flex-grow-1 d-flex justify-content-center align-items-center">
-                    Souper
-                  </div>
-                  <div className="mb-2 flex-grow-1 d-flex justify-content-center align-items-center">
-                    Dinner
-                  </div>
-                </div>
+            </LokaCorps>
+
+            <LokaCorps jour={"Jeudi"}>
+              <div className="d-flex flex-column corps-sous-cadre">
+                {!details ? (
+                  <LoadingEDT />
+                ) : loka.length > 0 ? (
+                  loka
+                    .slice(trofa.jeudi)
+                    .slice(0, 5)
+                    .map((s, key) =>
+                      s.lnom != "/" ? (
+                        <CardTrofel
+                          key={key}
+                          lnom={s.lnom}
+                          id={s.id}
+                          onEditSuccess={getLoka}
+                          onDeleteSuccess={getLoka}
+                        />
+                      ) : (
+                        <EmptyCard key={key} />
+                      )
+                    )
+                ) : (
+                  Array.from({ length: 5 }).map((_, index) => (
+                    <EmptyCard key={index} onSave={getLoka} />
+                  ))
+                )}
               </div>
-            </div>
-            <div className="col-md">
-              <div className="row cadre">
-                <div className="d-flex flex-column">
-                  <div className="mb-2 flex-grow-1 d-flex justify-content-center align-items-center">
-                    Jeudi
-                  </div>
-                  <div className="mb-2 flex-grow-1 d-flex justify-content-center align-items-center">
-                    Petit Dejeuner
-                  </div>
-                  <div className="mb-2 flex-grow-1 d-flex justify-content-center align-items-center">
-                    Gouter
-                  </div>
-                  <div className="mb-2 flex-grow-1 d-flex justify-content-center align-items-center">
-                    Dejeuner
-                  </div>
-                  <div className="mb-2 flex-grow-1 d-flex justify-content-center align-items-center">
-                    Souper
-                  </div>
-                  <div className="mb-2 flex-grow-1 d-flex justify-content-center align-items-center">
-                    Dinner
-                  </div>
-                </div>
+            </LokaCorps>
+
+            <LokaCorps jour={"Vendredi"}>
+              <div className="d-flex flex-column corps-sous-cadre">
+                {!details ? (
+                  <LoadingEDT />
+                ) : loka.length > 0 ? (
+                  loka
+                    .slice(trofa.vendredi)
+                    .slice(0, 5)
+                    .map((s, key) =>
+                      s.lnom != "/" ? (
+                        <CardTrofel
+                          key={key}
+                          lnom={s.lnom}
+                          id={s.id}
+                          onEditSuccess={getLoka}
+                          onDeleteSuccess={getLoka}
+                        />
+                      ) : (
+                        <EmptyCard key={key} />
+                      )
+                    )
+                ) : (
+                  Array.from({ length: 5 }).map((_, index) => (
+                    <EmptyCard key={index} onSave={getLoka} />
+                  ))
+                )}
               </div>
-            </div>
-            <div className="col-md">
-              <div className="row cadre">
-                <div className="d-flex flex-column">
-                  <div className="mb-2 flex-grow-1 d-flex justify-content-center align-items-center">
-                    Vendredi
-                  </div>
-                  <div className="mb-2 flex-grow-1 d-flex justify-content-center align-items-center">
-                    Petit Dejeuner
-                  </div>
-                  <div className="mb-2 flex-grow-1 d-flex justify-content-center align-items-center">
-                    Gouter
-                  </div>
-                  <div className="mb-2 flex-grow-1 d-flex justify-content-center align-items-center">
-                    Dejeuner
-                  </div>
-                  <div className="mb-2 flex-grow-1 d-flex justify-content-center align-items-center">
-                    Souper
-                  </div>
-                  <div className="mb-2 flex-grow-1 d-flex justify-content-center align-items-center">
-                    Dinner
-                  </div>
-                </div>
+            </LokaCorps>
+
+            <LokaCorps jour={"Samedi"}>
+              <div className="d-flex flex-column corps-sous-cadre">
+                {!details ? (
+                  <LoadingEDT />
+                ) : loka.length > 0 ? (
+                  loka
+                    .slice(trofa.samedi)
+                    .slice(0, 5)
+                    .map((s, key) =>
+                      s.lnom != "/" ? (
+                        <CardTrofel
+                          key={key}
+                          lnom={s.lnom}
+                          id={s.id}
+                          onEditSuccess={getLoka}
+                          onDeleteSuccess={getLoka}
+                        />
+                      ) : (
+                        <EmptyCard key={key} />
+                      )
+                    )
+                ) : (
+                  Array.from({ length: 5 }).map((_, index) => (
+                    <EmptyCard key={index} onSave={getLoka} />
+                  ))
+                )}
               </div>
-            </div>
-            <div className="col-md">
-              <div className="row cadre">
-                <div className="d-flex flex-column">
-                  <div className="mb-2 flex-grow-1 d-flex justify-content-center align-items-center">
-                    Samedi
-                  </div>
-                  <div className="mb-2 flex-grow-1 d-flex justify-content-center align-items-center">
-                    Petit Dejeuner
-                  </div>
-                  <div className="mb-2 flex-grow-1 d-flex justify-content-center align-items-center">
-                    Gouter
-                  </div>
-                  <div className="mb-2 flex-grow-1 d-flex justify-content-center align-items-center">
-                    Dejeuner
-                  </div>
-                  <div className="mb-2 flex-grow-1 d-flex justify-content-center align-items-center">
-                    Souper
-                  </div>
-                  <div className="mb-2 flex-grow-1 d-flex justify-content-center align-items-center">
-                    Dinner
-                  </div>
-                </div>
+            </LokaCorps>
+
+            <LokaCorps jour={"Dimanche"}>
+              <div className="d-flex flex-column corps-sous-cadre">
+                {!details ? (
+                  <LoadingEDT />
+                ) : loka.length > 0 ? (
+                  loka
+                    .slice(trofa.dimanche)
+                    .slice(0, 5)
+                    .map((s, key) =>
+                      s.lnom != "/" ? (
+                        <CardTrofel
+                          key={key}
+                          lnom={s.lnom}
+                          id={s.id}
+                          onEditSuccess={getLoka}
+                          onDeleteSuccess={getLoka}
+                        />
+                      ) : (
+                        <EmptyCard key={key} />
+                      )
+                    )
+                ) : (
+                  Array.from({ length: 5 }).map((_, index) => (
+                    <EmptyCard key={index} onSave={getLoka} />
+                  ))
+                )}
               </div>
-            </div>
-            <div className="col-md">
-              <div className="row cadre">
-                <div className="d-flex flex-column">
-                  <div className="mb-2 flex-grow-1 d-flex justify-content-center align-items-center">
-                    Dimanche
-                  </div>
-                  <div className="mb-2 flex-grow-1 d-flex justify-content-center align-items-center">
-                    Petit Dejeuner
-                  </div>
-                  <div className="mb-2 flex-grow-1 d-flex justify-content-center align-items-center">
-                    Gouter
-                  </div>
-                  <div className="mb-2 flex-grow-1 d-flex justify-content-center align-items-center">
-                    Dejeuner
-                  </div>
-                  <div className="mb-2 flex-grow-1 d-flex justify-content-center align-items-center">
-                    Souper
-                  </div>
-                  <div className="mb-2 flex-grow-1 d-flex justify-content-center align-items-center">
-                    Dinner
-                  </div>
-                </div>
-              </div>
-            </div>
+            </LokaCorps>
           </div>
-
-          {selectedEntity && (
-            <DeleteModal
-              show={showDeleteModal}
-              onClose={() => setShowDeleteModal(false)}
-              onConfirm={handleDeleteConfirm}
-              entity={selectedEntity}
-              entityName={"histo"}
-              auth={u_info.opts}
-            />
-          )}
         </main>
       </div>
     </div>

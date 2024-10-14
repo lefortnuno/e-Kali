@@ -6,15 +6,16 @@
   --text-light: #8995a7;
   --white: #ffffff;
   --max-width: 1200px;
+  --mena-keli:rgba(210, 0, 0, 0.781);
 }
 
-.logo {
+.header .logo {
   border: 2px solid var(--mena-keli);
   margin-bottom: 2%;
   width: 40px;
   transition: 0.25s;
 }
-.logo:hover {
+.header .logo:hover {
   cursor: pointer;
   border: 2px solid var(--mena);
   width: 41px;

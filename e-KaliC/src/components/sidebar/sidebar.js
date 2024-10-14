@@ -3,7 +3,7 @@ import GetUserData from "../../contexts/api/udata";
 import { Link, useLocation } from "react-router-dom";
 
 import "./sidebar.css";
-import hma from "../../assets/images/hma256.png";
+import lefort from "../../assets/images/lefort.jpg";
 
 import {
   BsFolder2Open,
@@ -36,10 +36,10 @@ export default function Sidebar() {
       <div className="position-sticky">
         <div className="carte-visite">
           <img
-            src={hma}
-            alt="bg-hma"
+            src={lefort}
+            alt="bg-lefort"
             className="logo img-fluid rounded-circle me-2"
-            style={{ width: "50px" }}
+            style={{ width: "3.5rem", height:"3rem" }}
           />
           <div className="carte-visite-name">
             <p className="text-muted">Bonjour</p> <b>{u_info.u_nom}</b>
@@ -48,46 +48,13 @@ export default function Sidebar() {
 
         <ul className="nav flex-column">
           <li className={location.pathname === "/home/" ? "active" : ""}>
-            <Link to="/home/">
+            <Link to="/loka/">
               <span>
                 <BsHouse />
               </span>
-              <p>Accueil</p>
+              <p>Menu</p>
             </Link>
-          </li>
-          <li className={location.pathname === "/inComing/" ? "active" : ""}>
-            <Link to="/inComing/">
-              <span>
-                <BsGraphUp />
-              </span>
-              <p>Gain</p>
-            </Link>
-          </li>
-          <li className={location.pathname === "/outGoing/" ? "active" : ""}>
-            <Link to="/outGoing/">
-              <span>
-                <BsGraphDown />
-              </span>
-              {/* <BsCashCoin /> */}
-              <p>Dépense</p>
-            </Link>
-          </li>
-          <li className={location.pathname === "/services/" ? "active" : ""}>
-            <Link to="/services/">
-              <span>
-                <BsGear />
-              </span>
-              <p>Services</p>
-            </Link>
-          </li>
-          <li className={location.pathname === "/boutiques/" ? "active" : ""}>
-            <Link to="/boutiques/">
-              <span>
-                <BsGlobe2 />
-              </span>
-              <p>Boutiques</p>
-            </Link>
-          </li>
+          </li> 
 
           <div className="separator"></div>
 

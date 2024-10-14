@@ -7,13 +7,12 @@
   --white: #ffffff;
   --gray: #efeeee;
   --mena: red;
-  --mena-keli:rgba(207, 19, 19, 0.593);
   --max-width: 1200px;
 }
 
 .sidebar {
   margin-top: 2.3%;
-  min-height: 80vh;
+  min-height: 40vh;
   height: calc(100% - 60px);
   background-color: var(--white);
   color: var(--text-dark);
@@ -35,6 +34,10 @@
   box-shadow: 2px 2px 5px var(--secondary-color);
   border-radius: 2%;
 }
+.sidebar .logo {
+  border: 2px solid var(--secondary-color);
+  margin-bottom: 2%;
+}
 .carte-visite-name {
   display: flex;
   flex-direction: row;
@@ -49,7 +52,7 @@
   padding: 0;
   margin: 0;
   padding-top: 20px;
-  min-height: 60vh;
+  min-height: 50vh;
 }
 .sidebar ul li {
   margin-bottom: 20px;
@@ -63,7 +66,7 @@
   text-decoration: none;
   font-size: 16px;
   transition: color 0.3s ease-in-out;
-  transition: background-color 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
   font-weight: unset;
   padding-left: 5%;
   border-left: 6px solid var(--secondary-color);
@@ -93,11 +96,11 @@
   font-weight: bold;
   background-color: var(--gray);
 }
-.separator { 
-  height: 6px; 
+.separator {
+  height: 6px;
   background-color: var(--secondary-color);
-  margin: 1rem 0;  
-  width: 100%; 
+  margin: 1rem 0;
+  width: 100%;
 }
 
 @media (width < 1150px) {
@@ -151,5 +154,5 @@
 @media (width < 400px) {
   .sidebar {
     margin-top: 12.3%;
-  }
+  } 
 }

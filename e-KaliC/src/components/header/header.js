@@ -12,6 +12,10 @@ export default function Header({ children }) {
   const u_info = GetUserData();
   const navigate = useNavigate();
 
+  const handleAdminClick = (entity) => {
+    navigate(`/users/`);
+  };
+
   // Fonction pour se déconnecter et rediriger vers la page de connexion
   const seDeconnecterDuSession = (event) => {
     event.preventDefault();
@@ -34,26 +38,29 @@ export default function Header({ children }) {
         <header className="py-3">
           <div className="header container-fluid d-flex justify-content-between align-items-center bg-white">
             <div className="d-flex align-items-center">
-              <div className="d-flex align-items-center">
-                <button
-                  className="btn btn-outline-light me-3 d-md-none text-dark"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#sidebarMenu"
-                  aria-controls="sidebarMenu"
-                  aria-expanded="false"
-                  aria-label="Toggle navigation"
-                  onClick={scrollToTop}
-                >
-                  &#9776; Menu
-                </button>
-              </div>
-
               <img
                 src={eKali}
                 alt="bg-eKali"
+                onClick={u_info.u_karazana == 1 ? handleAdminClick : null}
                 className="logo img-fluid rounded-circle me-2"
               />
+              {u_info.u_karazana == 1 ? (
+                <div className="d-flex align-items-center">
+                  <button
+                    className="btn btn-outline-light me-3 d-md-none text-dark"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#sidebarMenu"
+                    aria-controls="sidebarMenu"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+                    onClick={scrollToTop}
+                    style={{ fontSize: "1.5rem" }}
+                  >
+                    &#9776;
+                  </button>
+                </div>
+              ) : null}
             </div>
 
             <div className="d-flex align-items-center">

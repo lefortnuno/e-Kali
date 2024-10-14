@@ -1,44 +1,45 @@
+import axios from "../../contexts/api/axios";
+import GetUserData from "../../contexts/api/udata";
+
 import React from "react";
 import { Modal, Button } from "react-bootstrap";
-import axios from "../../contexts/api/axios";
+
 import { toast } from "react-toastify";
 
-export default function DeleteModal({
-  show,
-  onClose,
-  onConfirm,
-  entity,
-  entityName,
-  auth,
-}) {
+export default function DeleteModal({ lnom, id, onClose, onDeleteConfirm }) {
+  const u_info = GetUserData();
+
   const handleDelete = () => {
     axios
-      .delete(`${entityName}/${entity.id}`, auth)
+      .delete(`loka/${id}`, u_info.opts)
       .then((response) => {
         if (response.status === 200) {
           toast.success(
             `${
-              entityName.charAt(0).toUpperCase() + entityName.slice(1)
+              lnom.charAt(0).toUpperCase() + lnom.slice(1)
             } supprimé avec succès!`
           );
-          onConfirm(); // Action à effectuer après suppression
+          onDeleteConfirm(); // Action à effectuer après suppression
         } else {
-          toast.error(`Erreur lors de la suppression du ${entityName}.`);
+          toast.error(`Erreur lors de la suppression du ${lnom}.`);
         }
       })
       .catch((error) => {
-        toast.error(`Erreur lors de la suppression du ${entityName}.`);
+        toast.error(`Erreur lors de la suppression du ${lnom}.`);
       });
   };
 
   return (
-    <Modal show={show} onHide={onClose}>
+    <Modal show onHide={onClose}>
       <Modal.Header closeButton>
         <Modal.Title>Confirmation de suppression</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        Êtes-vous sûr de vouloir supprimer {entityName}{" "}
-        <strong>#°{entity.id}</strong> ?
+        Êtes-vous sûr de vouloir supprimer{" "}
+        <strong>
+          {lnom} ID°{id}
+        </strong>
+        ?
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={onClose}>
