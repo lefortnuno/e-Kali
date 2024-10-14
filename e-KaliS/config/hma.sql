@@ -15,7 +15,7 @@ create table mpampiasa(
     primary key(id),
     unique index `id_unique` (`id` desc),
     unique index `idPS_unique` (`idPS`)
-) ENGINE = InnoDB AUTO_INCREMENT = 1 DEFAULT CHARSET = latin1;
+) ENGINE = InnoDB AUTO_INCREMENT = 40 DEFAULT CHARSET = latin1;
 
 create table loka(
     id int(11) not null auto_increment,
@@ -26,7 +26,7 @@ create table loka(
     unique index `nom_unique` (`nom`),
     index `mpampiasa_idx` (`idM` desc),
     constraint idM foreign key (idM) references ekali.mpampiasa(id) on delete CASCADE on update CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 DEFAULT CHARSET = latin1;
+) ENGINE = InnoDB AUTO_INCREMENT = 40 DEFAULT CHARSET = latin1;
 
 create table nahandro(
     id int(11) not null auto_increment,
@@ -37,7 +37,7 @@ create table nahandro(
     unique index `id_unique` (`id` desc),
     index `loka_idLx` (`idL` desc),
     constraint idL foreign key (idL) references ekali.loka(id) on delete CASCADE on update CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 DEFAULT CHARSET = latin1;
+) ENGINE = InnoDB AUTO_INCREMENT = 40 DEFAULT CHARSET = latin1;
 
 -- - CREATION UTILISATEUR ADMIN ------------------
 insert into

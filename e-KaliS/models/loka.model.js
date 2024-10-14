@@ -14,7 +14,7 @@ const reqSQL = `SELECT
                 FROM mpampiasa, loka 
                 WHERE (mpampiasa.id = loka.idM) `;
 const myReq = ` AND idM = ? `;
-const ordre = ` ORDER BY id DESC `;
+const ordre = ` ORDER BY id ASC `;
 
 Loka.addLoka = (newLoka, result) => {
   dbConn.query("INSERT INTO loka SET ?", newLoka, (err, res) => {
@@ -24,7 +24,7 @@ Loka.addLoka = (newLoka, result) => {
       result(err, null);
     }
   });
-}; 
+};
 
 Loka.getAllMyLoka = (id, result) => {
   dbConn.query(reqSQL + myReq + ordre, id, (err, res) => {

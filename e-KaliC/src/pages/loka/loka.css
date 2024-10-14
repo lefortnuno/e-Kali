@@ -1,0 +1,195 @@
+:root {
+  --primary-color: #2015ea;
+  --primary-color-light: #6861f1;
+  --secondary-color: #c0dbea;
+  --text-dark: #020617;
+  --text-light: #8995a7;
+  --gray-light: #afb7c2;
+  --white: #ffffff;
+  --maintso: #32cd32;
+  --max-width: 1200px;
+}
+.main {
+  margin-top: 2.3%;
+}
+.cadre {
+  height: 80vh;
+}
+.sous-cadre {
+  height: 100%;
+}
+.titre-sous-cadre,
+.contenu-vide-csc,
+.contenu-corps-sous-cadre {
+  flex-basis: 20%;
+}
+.corps-sous-cadre {
+  flex-grow: 1;
+}
+/* ------------------------------------------------- */
+.titre-sous-cadre {
+  background-color: var(--white);
+  border-radius: 5px;
+}
+
+/* ------------------------------------------------- */
+.cardTrofel {
+  width: 100%;
+  height: 100%;
+  background-color: var(--white);
+  overflow: hidden;
+  cursor: pointer;
+  border-radius: 7px;
+  transition: 0.7s;
+  border: 4px double var(--text-dark);
+}
+.cardTrofel img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.card-vide {
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  background-image: url("../../assets/images/plus.png");
+  background-size: auto;
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  transition: background-color 0.5s;
+}
+.card-vide:hover { 
+  background-color: var(--secondary-color); 
+}
+
+.card-loading {
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  background-image: url("../../assets/images/chargement.png");
+  background-size: auto;
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+
+  transform: rotate(0deg);
+  animation: miodina 1.5s forwards infinite; 
+}
+@keyframes miodina {
+  0% {
+    transform: rotate(0deg);
+  } 
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.cardTrofel .card-underlay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  opacity: 1;
+  transition: opacity 0.5s;
+}
+.cardTrofel .card-overlay {
+  position: relative;
+  top: 100%;
+  opacity: 0;
+  width: 0%;
+  height: 0%;
+  left: 0;
+  background-color: var(--secondary-color);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2px;
+  transition: top 0.7s, opacity 0.7s;
+  z-index: 1;
+  opacity: 0.8;
+}
+.cardTrofel:hover .card-overlay {
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
+
+.cardTrofel:hover .card-underlay {
+  /* Mampisy bugs  */
+  /* position: absolute;
+  z-index: 1; 
+  opacity: 1;*/
+  opacity: 0;
+  width: 0%;
+  height: 0%;
+}
+.co-top {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.co-bottom {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.co-t-maso,
+.co-b-right,
+.co-b-left {
+  width: 100%;
+  height: 100%;
+  padding: 2% 0%;
+}
+.co-t-maso {
+  background-color: var(--maintso);
+  transition: color 0.5s, background-color 0.5s;
+}
+.co-b-left {
+  background-color: var(--primary-color);
+  transition: color 0.5s, background-color 0.5s;
+}
+.co-b-right {
+  background-color: var(--mena);
+  transition: color 0.5s, background-color 0.5s;
+}
+.co-t-maso:hover {
+  background-color: var(--white);
+  color: var(--maintso);
+}
+.co-b-left:hover {
+  background-color: var(--white);
+  color: var(--primary-color);
+}
+.co-b-right:hover {
+  background-color: var(--white);
+  color: var(--mena);
+}
+.maso {
+  width: 100%;
+  font-size: 1.6rem;
+}
+.ovao,
+.fafao {
+  width: 100%;
+  font-size: 1.2rem;
+}
