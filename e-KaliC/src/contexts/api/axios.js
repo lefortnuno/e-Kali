@@ -5,6 +5,6 @@ export default axios.create({
     `` +
     process.env.REACT_APP_SUN_API_HEAD +
     process.env.REACT_APP_SUN_API_IP_ADRESS +
-    process.env.REACT_APP_SUN_API_PORT +
+    // process.env.REACT_APP_SUN_API_PORT +
     `/api/`,
 });
