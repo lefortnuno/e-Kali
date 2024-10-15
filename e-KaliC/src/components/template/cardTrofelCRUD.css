@@ -1,5 +1,5 @@
 
-.cardTrofel .card-underlay {
+.cardTrofel .card-underlay, .card-content {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -9,7 +9,7 @@
     height: 100%;
     z-index: 2;
     opacity: 1;
-    transition: opacity 0.5s;
+    transition: all 0.5s ease-in-out;
   }
   .cardTrofel .card-overlay {
     position: relative;
@@ -37,6 +37,11 @@
     z-index: 2;
   }
   
+  .cardTrofel:hover .card-content { 
+    opacity: 1;
+    background-color: var(--secondary-color);
+  }
+
   .cardTrofel:hover .card-underlay {
     /* Mampisy bugs  */
     /* position: absolute;

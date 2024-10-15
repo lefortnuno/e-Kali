@@ -34,7 +34,7 @@ module.exports.loginUtilisateur = (req, res) => {
 
         if (validePwd) {
           const token = createToken(resp);
-          res.send({ success: true, token, user: resp, message: "Connecté à HMA!" });
+          res.send({ success: true, token, user: resp, message: "Connecté à eKali!" });
         } else {
           res.send({ success: false, message : "Mot de passe incorrect!" });
         }

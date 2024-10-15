@@ -26,14 +26,14 @@ export default function LokaTitre() {
             >
               P'tit Déj
             </div>
-            <div
+            {/* <div
               className="mb-2 flex-grow-1 d-flex justify-content-center align-items-center csc"
               style={
                 isWithinTimeRange(16, 17) ? { backgroundColor: "#c0dbea" } : {}
               }
             >
               Goûter
-            </div>
+            </div> */}
             <div
               className="mb-2 flex-grow-1 d-flex justify-content-center align-items-center csc"
               style={
@@ -42,14 +42,14 @@ export default function LokaTitre() {
             >
               Déjeuner
             </div>
-            <div
+            {/* <div
               className="mb-2 flex-grow-1 d-flex justify-content-center align-items-center csc"
               style={
                 isWithinTimeRange(19, 21) ? { backgroundColor: "#c0dbea" } : {}
               }
             >
               Souper
-            </div>
+            </div> */}
             <div
               className="mb-2 flex-grow-1 d-flex justify-content-center align-items-center csc"
               style={

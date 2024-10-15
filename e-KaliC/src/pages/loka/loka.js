@@ -3,10 +3,10 @@ import GetUserData from "../../contexts/api/udata";
 
 import Header from "../../components/header/header";
 import LoadingEDT from "../../components/loading/loadingEDT";
-import EmptyCard from "../../components/template/emptyCard";
-import CardTrofel from "../../components/template/cardTrofel";
-import LokaTitre from "../../components/template/lokaTitre";
-import LokaCorps from "../../components/template/lokaCorps";
+import EmptyCard from "../../components/cards/emptyCard";
+import CardTrofel from "../../components/cards/cardTrofel";
+import LokaTitre from "../../components/cards/lokaTitre";
+import LokaCorps from "../../components/cards/lokaCorps";
 
 import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
@@ -30,7 +30,6 @@ const trofa = {
 
 export default function Loka() {
   //#region //-variable
-
   const u_info = GetUserData();
   const [loka, setLoka] = useState([]);
   const [details, setDetails] = useState(null);
@@ -151,7 +150,7 @@ export default function Loka() {
                 ) : loka.length > 0 ? (
                   loka
                     .slice(trofa.lundi)
-                    .slice(0, 5)
+                    .slice(0, 3)
                     .map((s, key) =>
                       s.lnom != "/" ? (
                         <CardTrofel
@@ -159,14 +158,14 @@ export default function Loka() {
                           lnom={s.lnom}
                           id={s.id}
                           onEditSuccess={getLoka}
-                          onDeleteSuccess={getLoka}
+                          // onDeleteSuccess={getLoka}={getLoka}
                         />
                       ) : (
                         <EmptyCard key={key} />
                       )
                     )
                 ) : (
-                  Array.from({ length: 5 }).map((_, index) => (
+                  Array.from({ length: 3 }).map((_, index) => (
                     <EmptyCard key={index} onSave={getLoka} />
                   ))
                 )}
@@ -180,7 +179,7 @@ export default function Loka() {
                 ) : loka.length > 0 ? (
                   loka
                     .slice(trofa.mardi)
-                    .slice(0, 5)
+                    .slice(0, 3)
                     .map((s, key) =>
                       s.lnom != "/" ? (
                         <CardTrofel
@@ -188,14 +187,14 @@ export default function Loka() {
                           lnom={s.lnom}
                           id={s.id}
                           onEditSuccess={getLoka}
-                          onDeleteSuccess={getLoka}
+                          // onDeleteSuccess={getLoka}={getLoka}
                         />
                       ) : (
                         <EmptyCard key={key} />
                       )
                     )
                 ) : (
-                  Array.from({ length: 5 }).map((_, index) => (
+                  Array.from({ length: 3 }).map((_, index) => (
                     <EmptyCard key={index} onSave={getLoka} />
                   ))
                 )}
@@ -209,7 +208,7 @@ export default function Loka() {
                 ) : loka.length > 0 ? (
                   loka
                     .slice(trofa.mercredi)
-                    .slice(0, 5)
+                    .slice(0, 3)
                     .map((s, key) =>
                       s.lnom != "/" ? (
                         <CardTrofel
@@ -217,14 +216,14 @@ export default function Loka() {
                           lnom={s.lnom}
                           id={s.id}
                           onEditSuccess={getLoka}
-                          onDeleteSuccess={getLoka}
+                          // onDeleteSuccess={getLoka}={getLoka}
                         />
                       ) : (
                         <EmptyCard key={key} />
                       )
                     )
                 ) : (
-                  Array.from({ length: 5 }).map((_, index) => (
+                  Array.from({ length: 3 }).map((_, index) => (
                     <EmptyCard key={index} onSave={getLoka} />
                   ))
                 )}
@@ -238,7 +237,7 @@ export default function Loka() {
                 ) : loka.length > 0 ? (
                   loka
                     .slice(trofa.jeudi)
-                    .slice(0, 5)
+                    .slice(0, 3)
                     .map((s, key) =>
                       s.lnom != "/" ? (
                         <CardTrofel
@@ -246,14 +245,14 @@ export default function Loka() {
                           lnom={s.lnom}
                           id={s.id}
                           onEditSuccess={getLoka}
-                          onDeleteSuccess={getLoka}
+                          // onDeleteSuccess={getLoka}={getLoka}
                         />
                       ) : (
                         <EmptyCard key={key} />
                       )
                     )
                 ) : (
-                  Array.from({ length: 5 }).map((_, index) => (
+                  Array.from({ length: 3 }).map((_, index) => (
                     <EmptyCard key={index} onSave={getLoka} />
                   ))
                 )}
@@ -267,7 +266,7 @@ export default function Loka() {
                 ) : loka.length > 0 ? (
                   loka
                     .slice(trofa.vendredi)
-                    .slice(0, 5)
+                    .slice(0, 3)
                     .map((s, key) =>
                       s.lnom != "/" ? (
                         <CardTrofel
@@ -275,14 +274,14 @@ export default function Loka() {
                           lnom={s.lnom}
                           id={s.id}
                           onEditSuccess={getLoka}
-                          onDeleteSuccess={getLoka}
+                          // onDeleteSuccess={getLoka}={getLoka}
                         />
                       ) : (
                         <EmptyCard key={key} />
                       )
                     )
                 ) : (
-                  Array.from({ length: 5 }).map((_, index) => (
+                  Array.from({ length: 3 }).map((_, index) => (
                     <EmptyCard key={index} onSave={getLoka} />
                   ))
                 )}
@@ -296,7 +295,7 @@ export default function Loka() {
                 ) : loka.length > 0 ? (
                   loka
                     .slice(trofa.samedi)
-                    .slice(0, 5)
+                    .slice(0, 3)
                     .map((s, key) =>
                       s.lnom != "/" ? (
                         <CardTrofel
@@ -304,14 +303,14 @@ export default function Loka() {
                           lnom={s.lnom}
                           id={s.id}
                           onEditSuccess={getLoka}
-                          onDeleteSuccess={getLoka}
+                          // onDeleteSuccess={getLoka}={getLoka}
                         />
                       ) : (
                         <EmptyCard key={key} />
                       )
                     )
                 ) : (
-                  Array.from({ length: 5 }).map((_, index) => (
+                  Array.from({ length: 3 }).map((_, index) => (
                     <EmptyCard key={index} onSave={getLoka} />
                   ))
                 )}
@@ -325,7 +324,7 @@ export default function Loka() {
                 ) : loka.length > 0 ? (
                   loka
                     .slice(trofa.dimanche)
-                    .slice(0, 5)
+                    .slice(0, 3)
                     .map((s, key) =>
                       s.lnom != "/" ? (
                         <CardTrofel
@@ -333,14 +332,14 @@ export default function Loka() {
                           lnom={s.lnom}
                           id={s.id}
                           onEditSuccess={getLoka}
-                          onDeleteSuccess={getLoka}
+                          // onDeleteSuccess={getLoka}={getLoka}
                         />
                       ) : (
                         <EmptyCard key={key} />
                       )
                     )
                 ) : (
-                  Array.from({ length: 5 }).map((_, index) => (
+                  Array.from({ length: 3 }).map((_, index) => (
                     <EmptyCard key={index} onSave={getLoka} />
                   ))
                 )}

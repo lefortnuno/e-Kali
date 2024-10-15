@@ -11,7 +11,7 @@
 .monContainer {
   position: relative;
   padding: 2% 3%;
-  text-align: left; 
+  text-align: left;
 }
 
 .monContainer header {
@@ -33,7 +33,7 @@
 .monContainer form {
   position: relative;
   margin-top: 16px;
-  min-height: 40vh; 
+  min-height: 40vh;
   overflow: hidden;
   overflow-y: scroll;
 }
@@ -188,8 +188,8 @@ form .buttons button,
   form .fields .monPhotoPDP {
     width: calc(100% / 3 - 15px);
   }
-  .monContainer form { 
-    min-height: 50vh;  
+  .monContainer form {
+    min-height: 50vh;
   }
 }
 
@@ -212,8 +212,8 @@ form .buttons button,
   .monToggleoption {
     margin-top: 2%;
   }
-  .monContainer form { 
-    min-height: 60vh;  
+  .monContainer form {
+    min-height: 60vh;
   }
 }
 

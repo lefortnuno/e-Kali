@@ -86,7 +86,7 @@ export default function InComingDetails() {
                     )}
                   </div>
                 </div>
-                <button onClick={onClose} className="retourBtn btn btn-primary">
+                <button onClick={onClose} className="btn btn-primary w-50 m-2">
                   Retour
                 </button>
               </div>

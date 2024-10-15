@@ -19,8 +19,7 @@
   height: 100%;
 }
 .titre-sous-cadre,
-.contenu-vide-csc,
-.contenu-corps-sous-cadre {
+.contenu-vide-csc  {
   flex-basis: 20%;
 }
 .corps-sous-cadre {
