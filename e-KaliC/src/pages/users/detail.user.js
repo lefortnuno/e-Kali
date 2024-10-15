@@ -44,13 +44,13 @@ export default function UserDetails() {
         <div className="row">
           <Sidebar />
 
-          <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4 main">
+          <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4 mt-4 main">
             {/* -------------------------- PAGE CONTENT -------------------------- */}
             <div className="bg-white card mb-3 ">
               <header className="bg-primary text-white py-2 d-flex align-items-center">
                 <BsInfoCircle className="ms-4 fs-5" />
                 <h4 className="me-4 m-0 flex-grow-1 text-center">
-                  Détails du Plât
+                  Détails sur l'utilisateur
                 </h4>
               </header>
 
