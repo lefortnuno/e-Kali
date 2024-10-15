@@ -1,6 +1,6 @@
 import LogInForm from "./login.form";
 import "../../assets/styles/auth.css";
-import hma from '../../assets/images/hma256.png'
+import eKali from '../../assets/images/eKali.png'
 
 export default function LogIn() {
   return (
@@ -12,8 +12,8 @@ export default function LogIn() {
       </div>
       <div className="containerImg">
       <img
-        src={hma}
-        alt="bg-hma"
+        src={eKali}
+        alt="bg-eKali"
       /> 
       </div> 
     </div>

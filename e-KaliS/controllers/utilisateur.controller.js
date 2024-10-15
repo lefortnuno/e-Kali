@@ -1,6 +1,7 @@
 "use strict";
 const Utilisateur = require("../models/utilisateur.model");
-const path = require("path");
+const Loka = require("../models/loka.model");
+
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const tmp = 3 * 24 * 60 * 60 * 1000;
@@ -34,15 +35,23 @@ module.exports.loginUtilisateur = (req, res) => {
 
         if (validePwd) {
           const token = createToken(resp);
-          res.send({ success: true, token, user: resp, message: "Connecté à eKali!" });
+          const idM = resp[0].id;
+          initializeUserLokas(idM);
+
+          res.send({
+            success: true,
+            token,
+            user: resp,
+            message: "Connecté à eKali!",
+          });
         } else {
-          res.send({ success: false, message : "Mot de passe incorrect!" });
+          res.send({ success: false, message: "Mot de passe incorrect!" });
         }
       } else {
-        res.send({ success: false, message:"Identifiant incorrect!" });
+        res.send({ success: false, message: "Identifiant incorrect!" });
       }
     } else {
-      res.send({success: false, message: err});
+      res.send({ success: false, message: err });
     }
   });
 };
@@ -113,6 +122,48 @@ module.exports.searchUtilisateur = (req, res) => {
       res.send(resp);
     } else {
       res.send(err);
+    }
+  });
+};
+
+const initializeUserLokas = (idM) => {
+  Loka.getAllMyLoka(idM, (err, lokas) => {
+    if (!err) {
+      if (lokas.length < 21) {
+        const defaultLokas = [
+          { nom: "Viande Hachée", idM },
+          { nom: "Poulet Frite", idM },
+          { nom: "Poisson Frite", idM },
+          { nom: "Riz", idM },
+          { nom: "Pâtes", idM },
+          { nom: "Pommes de terre", idM },
+          { nom: "Légume de Viande", idM },
+          { nom: "Légume de Poulet", idM },
+          { nom: "Oeufs", idM },
+          { nom: "Riz Cantonais", idM },
+          { nom: "Légume", idM },
+          { nom: "Salade de Fruit", idM },
+          { nom: "Spaghetti", idM },
+          { nom: "Haricots", idM },
+          { nom: "Poulet Sauce", idM },
+          { nom: "Poisson Sauce", idM },
+          { nom: "Céréales", idM },
+          { nom: "Yaourt/Pain/Lait", idM },
+          { nom: "Lentilles", idM },
+          { nom: "Thé/Café", idM },
+          { nom: "Mouton", idM },
+        ];
+        const itemsToInsert = defaultLokas.slice(0, 21 - lokas.length);
+        itemsToInsert.forEach((newLoka) => {
+          Loka.addLoka(newLoka, (err, result) => {
+            if (err) {
+              console.error("Erreur lors de l'ajout de l'élément Loka :", err);
+            }
+          });
+        });
+      }
+    } else {
+      console.error("Erreur lors de la récupération des Lokas :", err);
     }
   });
 };

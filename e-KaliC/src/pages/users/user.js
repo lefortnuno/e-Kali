@@ -29,15 +29,18 @@ const histoPerPage = 5;
 
 export default function User() {
   //#region //-variable
+  const navigate = useNavigate();
   const u_info = GetUserData();
+
   const [histo, setHisto] = useState([]);
   const [details, setDetails] = useState(null);
   const [totaly, setTotaly] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [selectedEntity, setSelectedEntity] = useState(null);
-  const navigate = useNavigate();
+
   const [searchVisible, setSearchVisible] = useState(false);
   const searchInputRef = useRef(null);
 
@@ -98,11 +101,6 @@ export default function User() {
     setShowDeleteModal(false);
     getHisto();
     getTotaly();
-  };
-
-  const handleEditClick = (entity) => {
-    // navigate(`/editUser/${entity.id}`, { state: { entity } });
-    navigate(`/users/`);
   };
 
   const handleDetailClick = (entity) => {
@@ -239,15 +237,14 @@ export default function User() {
                               </td>
                               <td>
                                 <span
-                                  className="btn btn-outline-primary btn-sm pt-0 mx-1 waves-effect"
-                                  onClick={() => handleEditClick(s)}
+                                  className="btn btn-outline-primary btn-sm pt-0 mx-1 waves-effect" 
                                   aria-disabled={true}
                                 >
                                   <BsPencilSquare />
                                 </span>
                                 <span
                                   className="btn btn-outline-danger btn-sm pt-0 mx-1 waves-effect"
-                                  onClick={() => handleDeleteClick(s)}
+                                  // onClick={() => handleDeleteClick(s)}
                                 >
                                   <BsFillTrashFill />
                                 </span>

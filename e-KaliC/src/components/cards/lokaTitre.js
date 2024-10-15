@@ -21,19 +21,11 @@ export default function LokaTitre() {
             <div
               className="mb-2 flex-grow-1 d-flex justify-content-center align-items-center csc"
               style={
-                isWithinTimeRange(6, 9) ? { backgroundColor: "#c0dbea" } : {}
+                isWithinTimeRange(6, 8) ? { backgroundColor: "#c0dbea" } : {}
               }
             >
               P'tit Déj
             </div>
-            {/* <div
-              className="mb-2 flex-grow-1 d-flex justify-content-center align-items-center csc"
-              style={
-                isWithinTimeRange(16, 17) ? { backgroundColor: "#c0dbea" } : {}
-              }
-            >
-              Goûter
-            </div> */}
             <div
               className="mb-2 flex-grow-1 d-flex justify-content-center align-items-center csc"
               style={
@@ -42,18 +34,10 @@ export default function LokaTitre() {
             >
               Déjeuner
             </div>
-            {/* <div
-              className="mb-2 flex-grow-1 d-flex justify-content-center align-items-center csc"
-              style={
-                isWithinTimeRange(19, 21) ? { backgroundColor: "#c0dbea" } : {}
-              }
-            >
-              Souper
-            </div> */}
             <div
               className="mb-2 flex-grow-1 d-flex justify-content-center align-items-center csc"
               style={
-                isWithinTimeRange(21, 23) ? { backgroundColor: "#c0dbea" } : {}
+                isWithinTimeRange(18, 20) ? { backgroundColor: "#c0dbea" } : {}
               }
             >
               Dîner

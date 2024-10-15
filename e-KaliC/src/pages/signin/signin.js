@@ -1,7 +1,7 @@
 import SignInForm from "./signin.form";
 import "../../assets/styles/auth.css";
 import "./signin.css";
-import hma from '../../assets/images/hma256.png'
+import eKali from '../../assets/images/eKali.png'
 
 export default function SignIn() {
   return (
@@ -13,8 +13,8 @@ export default function SignIn() {
       </div>
       <div className="containerImg">
         <img
-          src={hma}
-          alt="logo-hma"
+          src={eKali}
+          alt="logo-eKali"
         />
       </div> 
     </div>

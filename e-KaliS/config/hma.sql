@@ -22,8 +22,7 @@ create table loka(
     nom varchar(300) not null,
     idM int(11) not null,
     primary key(id),
-    unique index `id_unique` (`id` desc),
-    unique index `nom_unique` (`nom`),
+    unique index `id_unique` (`id` desc), 
     index `mpampiasa_idx` (`idM` desc),
     constraint idM foreign key (idM) references ekali.mpampiasa(id) on delete CASCADE on update CASCADE
 ) ENGINE = InnoDB AUTO_INCREMENT = 40 DEFAULT CHARSET = latin1;

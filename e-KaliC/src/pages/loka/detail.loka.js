@@ -2,12 +2,13 @@ import axios from "../../contexts/api/axios";
 import GetUserData from "../../contexts/api/udata";
 
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom"; 
+import { useNavigate, useParams } from "react-router-dom";
+import { BsInfoCircle } from "react-icons/bs";
 
-import Header from "../../components/header/header"; 
+import Header from "../../components/header/header";
 import Loading from "../../components/loading/loading";
 
-import eKali from "../../assets/images/eKali.png";
+import dev from "../../assets/images/dev.png";
 
 export default function InComingDetails() {
   const { id } = useParams();
@@ -22,7 +23,7 @@ export default function InComingDetails() {
         if (response.status === 200) {
           setDetails(response.data[0]);
         } else {
-          console.log("Détails non disponibles.");
+          // console.log("Détails non disponibles.");
         }
       })
       .catch((error) => {});
@@ -34,24 +35,28 @@ export default function InComingDetails() {
   return (
     <>
       <div className="d-flex flex-column min-vh-100">
-        <Header> 
-        </Header>
+        <Header />
 
         <div className="container-fluid flex-grow-1">
           <main className="col-md-12 ms-sm-auto col-lg-12 px-md-4 mt-5">
-            <div className="monContainer bg-white card mb-3 ">
-              <header>Détails du met</header>
+            <div className="bg-white card mb-3 ">
+              <header className="bg-primary text-white py-2 d-flex align-items-center">
+                <BsInfoCircle className="ms-4 fs-5" />
+                <h4 className="me-4 m-0 flex-grow-1 text-center">
+                  Détails du Plât
+                </h4>
+              </header>
 
               <div className="mt-2">
                 <div className="row">
                   <div className="col-md-4">
                     <div className="u-img">
-                      <img src={eKali} alt="pdp" />
+                      <img src={dev} alt="pdp" />
                     </div>
                   </div>
                   <div className="col-md-8">
                     {!details ? (
-                      <Loading />
+                      <Loading text={" En cours de développement..."} />
                     ) : (
                       <div>
                         <p>

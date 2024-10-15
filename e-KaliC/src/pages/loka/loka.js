@@ -19,12 +19,12 @@ import "./loka.css";
 const url_req = `loka/`;
 const trofa = {
   lundi: 0,
-  mardi: 5,
-  mercredi: 10,
-  jeudi: 15,
-  vendredi: 20,
-  samedi: 25,
-  dimanche: 30,
+  mardi: 3,
+  mercredi: 6,
+  jeudi: 9,
+  vendredi: 12,
+  samedi: 15,
+  dimanche: 18,
   trofa69: 69,
 };
 

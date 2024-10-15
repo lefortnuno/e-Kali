@@ -196,8 +196,7 @@ export default function LoginForm() {
         if (response.status === 200) {
           if (response.data.success) {
             toast.success(response.data.message);
-            navigate("/loka/"); // Redirection après connexion réussie
-            console.log("Info recu du backend : ", response);
+            navigate("/loka/");  
 
             localStorage.setItem("token", response.data.token);
             const utilisateur = response.data.user[0];
@@ -337,7 +336,7 @@ export default function LoginForm() {
       // Démarrer un nouveau timer
       timeoutRef.current = setTimeout(() => {
         autoValidation();
-      }, timerDelai);
+      }, timerDelai/10);
     } else {
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current); // Annule le timeout précédent

@@ -1,4 +1,4 @@
-import hma from "../../assets/images/hma256.png";
+import dev from "../../assets/images/dev.png";
 import trofel from "../../assets/images/trofel.jpg";
 import github from "../../assets/images/github.png";
 import facebook from "../../assets/images/facebook.png";
@@ -76,8 +76,8 @@ export default function Footer() {
       <div className="footer-right">
         <div className="fr-img">
           <img
-            src={hma}
-            alt="hma"
+            src={dev}
+            alt="dev"
             className="img-fluid logo rounded-square me-2"
           />
         </div>

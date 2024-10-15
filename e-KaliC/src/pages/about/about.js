@@ -15,7 +15,7 @@ export default function About() {
         <div className="row">
           <Sidebar />
 
-          <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4 main">
+          <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4 mt-4 main">
             <div className="pt-3 pb-2 mb-3">
               {/* -------------------------- PAGE CONTENT -------------------------- */}
               <h2>About</h2>

@@ -19,7 +19,7 @@ const ordre = ` ORDER BY id ASC `;
 Loka.addLoka = (newLoka, result) => {
   dbConn.query("INSERT INTO loka SET ?", newLoka, (err, res) => {
     if (!err) {
-      result(null, { success: true, message: "Ajout reussi !" });
+      result(null, { success: true, message: "Ajout reussi!" });
     } else {
       result(err, null);
     }

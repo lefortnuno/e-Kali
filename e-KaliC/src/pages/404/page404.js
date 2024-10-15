@@ -1,8 +1,12 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import "../../assets/styles/pageNotFound.css";
-import p2_404 from "../../assets/images/p404_2.png";
-import p7_404 from "../../assets/images/p404_7.png"; 
+import { BsInfoCircle } from "react-icons/bs";
+
+import Header from "../../components/header/header";
+import page404 from "../../assets/images/page404.svg";
+import Loading from "../../components/loading/loading";
+
+import "./pageNotFound.css";
 
 export default function PageNotFound() {
   const navigate = useNavigate();
@@ -11,35 +15,42 @@ export default function PageNotFound() {
   };
 
   return (
-    <>
-      <div className="wrapper_404">
-        <div className="container_404">
-          <div className="grid-row">
-            <div className="colmun colmun-left">
-              <img
-                src={p2_404}
-                alt="image-left"
-              />
-              <h1 className="px-spc-b-20">
-                Nous ne trouvons la page que vous demandez.
-              </h1>
+    <div
+      className="d-flex flex-column min-vh-100"
+      style={{ overflow: "hidden" }}
+    >
+      <Header />
+      <div className="container-fluid flex-grow-1">
+        <main className="col-md-12 ms-sm-auto col-lg-12 px-md-4 mt-5">
+          <div className="bg-white card mb-3 ">
+            <header className="bg-primary text-white py-2 d-flex align-items-center">
+              <BsInfoCircle className="ms-4 fs-5" />
+              <h4 className="me-4 m-0 flex-grow-1 text-center">
+                Détails du Plât
+              </h4>
+            </header>
 
+            <div className="mt-2">
+              <div className="row">
+                <div className="col-md-4">
+                  <div className="u-img">
+                    <img src={page404} alt="pdp" />
+                  </div>
+                </div>
+                <div className="col-md-8">
+                <Loading text={"Nous ne trouvons la page que vous demandez..."} />
+                </div>
+              </div>
               <button
-                className="go-home btn button_404"
                 onClick={redirectedToHome}
+                className="btn btn-primary w-50 m-2"
               >
-                <i className="fa fa-home"></i> Retour à l'accueil
+                Retour
               </button>
             </div>
-            <div className="colmun colmun-right">
-              <img
-                src={p7_404}
-                alt="right-shape"
-              />
-            </div>
           </div>
-        </div>
+        </main>
       </div>
-    </>
+    </div>
   );
 }
