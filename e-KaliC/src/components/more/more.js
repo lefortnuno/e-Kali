@@ -1,12 +1,12 @@
 export default function More() {
   return (
     <>
-      <div className="pt-0 pb-2 mb-3">
-        {/* <h2>Responsive Content Area</h2> */}
-        {/* <p>
+      <div className="pt-0 pb-2 mb-3">{/* 
+       <h2>Responsive Content Area</h2> 
+        <p>
           This is the main content section. On smaller screens, click the menu
           button to toggle the sidebar.
-        </p> */}
+        </p> 
         <p style={{ textWrap: "balance"}}>
           --------------------------------------------------------------------------------------------------------------
         </p>
@@ -28,7 +28,7 @@ export default function More() {
               </div>
             </div>
           </div>
-        </div>
+        </div>*/}
       </div>
     </>
   );
